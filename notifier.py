@@ -7,6 +7,7 @@ import serial
 import fbconsole as fb
 from urllib import urlretrieve
 import imp
+import sys
 
 INTERVAL = 1 # check after INTERVAL minutes
 serv = 'mail.google.com'
@@ -14,7 +15,10 @@ path = '/mail/feed/atom'
 
 def writeSer(data):
 	try:
-		ser = serial.Serial('/dev/ttyUSB0', 9600)
+		if "linux" in sys.platform:
+			ser = serial.Serial('/dev/ttyUSB0', 9600)
+		elif "win" in sys.platform:
+			ser = serial.Serial('COM0', 9600)
 		ser.write(data) 
 	except serial.serialutil.SerialException:
 		print 'Error writing to serial device - Please check if arduino is properly connected'
