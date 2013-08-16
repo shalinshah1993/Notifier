@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<title>Gmail - Inbox for shalinshah1993@gmail.com</title>
+<tagline>New messages in your Gmail Inbox</tagline>
+<fullcount>1</fullcount>
+<link rel="alternate" href="http://mail.google.com/mail" type="text/html" />
+<modified>2013-08-15T19:00:10Z</modified>
+<entry>
+<title>ok</title>
+<summary>-- Yours Sincerely, Shalin Shah</summary>
+<link rel="alternate" href="http://mail.google.com/mail?account_id=shalinshah1993@gmail.com&amp;message_id=140835969c8ee5d4&amp;view=conv&amp;extsrc=atom" type="text/html" />
+<modified>2013-08-15T19:00:09Z</modified>
+<issued>2013-08-15T19:00:09Z</issued>
+<id>tag:gmail.google.com,2004:1443462601560221140</id>
+<author>
+<name>me</name>
+<email>shalinshah1993@gmail.com</email>
+</author>
+</entry>
+</feed>
+ 
