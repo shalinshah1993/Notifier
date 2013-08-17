@@ -12,14 +12,20 @@ import sys
 INTERVAL = 1 # check after INTERVAL minutes
 serv = 'mail.google.com'
 path = '/mail/feed/atom'
+GMAIL = 0
+FB = 1
 
-def writeSer(data):
+def writeSer(type,data):
 	try:
 		if "linux" in sys.platform:
 			ser = serial.Serial('/dev/ttyUSB0', 9600)
 		elif "win" in sys.platform:
 			ser = serial.Serial('COM0', 9600)
-		ser.write(data) 
+		if len(str(data)) == 1:
+			data = '0' + str(data)
+		else:
+			data = str(data)
+		ser.write(str(type) + data) 
 	except serial.serialutil.SerialException:
 		print 'Error writing to serial device - Please check if arduino is properly connected'
 
@@ -49,19 +55,19 @@ class Gmail:
 			last_check = time.time()
 			msgs = self.count(self.getfeed())
 			print msgs,'mails'
-			writeSer(str(msgs))
+			writeSer(GMAIL,str(msgs))
 
 
 class facebook():
-	
+
 	def __init__(self):
 		self.counter = 0
 		#fb = imp.load_source('fb', '.fbconsole.py')
 		fb.AUTH_SCOPE = ['read_stream','manage_notifications','read_mailbox','read_requests','user_status']
 		#fb.ACCESS_TOKEN = "713005285382454|QXlQXvch37hPNejb7TuFZBFoulU"
 		#fb.APP_ID = '713005285382454'
-		fb.authenticate()
-		
+		fb.authenticate()		
+
 		last_check = time.time() - INTERVAL*60 # subtract so that we check first time
 		while True:
 			if time.time() - last_check < INTERVAL*60:
@@ -74,7 +80,7 @@ class facebook():
 			if len(self.notify):
 				self.counter += len(self.notify)
 			self.printNotification()
-			writeSer(self.counter)
+			writeSer(FB,self.counter)
 			self.counter = 0
 		
 	def queryFB(self):
@@ -87,6 +93,10 @@ class facebook():
 		print "\nUser Id :", self.userId[0]["uid"] , "- User Name :", self.userId[0]["name"]
 		print "No of notifications :", len(self.notify), "Unread Mails :", self.mail[0]['unread_count']
 		print "Total Notifications :", self.counter
+
+	def __del__(self):
+		print "OKAY"
+		fb.logout()
 
 			
 if __name__ == '__main__':
