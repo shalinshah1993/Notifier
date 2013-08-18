@@ -1,3 +1,24 @@
 #GMAIL/FB NOTIFIER :-
 
--Python Script to give Gmail/FB Notification to Arduino Micro-Controller
+- Python Script to give Gmail/FB Notification to Arduino Micro-Controller.
+
+# How to Use :-
+
+- Open terrminal and write 
+	
+	 git clone https://github.com/shalinshah1993/Notifier.git 
+
+- cd Notifier and write python notifier.py
+
+#Modules Required :- 
+
+- You would require following modules to run this code :-
+
+	a) pySerial b)fbconsole
+
+- You can download them simply by following commands :-
+
+	pip install pySerial
+	pip install fbconsole
+
+
